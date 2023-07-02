@@ -24,6 +24,8 @@
 
 <script>
 import questionAPI from '../api/questions'
+import { generateUUID } from '../utils/common'
+import Cookies from '../utils/cookies'
 
 import ModalQuestionResult from './ModalQuestionResult.vue'
 import PageIntro from './PageIntro.vue'
@@ -44,6 +46,7 @@ export default {
   },
   data() {
     return {
+      userId: generateUUID(),
       step: 0,
       questionIndex: 0,
       questions: [],
@@ -65,6 +68,13 @@ export default {
     },
   },
   created() {
+    // Cookie
+    if (Cookies.get('user_id') !== null) {
+      this.userId = Cookies.get('user_id')
+    } else {
+      Cookies.set('user_id', this.userId)
+    }
+    // Load questions
     this.loading = true
     this.loadQuestions()
   },
@@ -85,8 +95,14 @@ export default {
     isStep(step) {
       return this.currentStep === step
     },
-    answerNews(response) {
+    async answerNews(response) {
       console.log('response', response)
+      await questionAPI.postEvent({
+        user_id: this.userId,
+        question_id: this.currentQuestion?.id,
+        event: 'response',
+        response: response,
+      })
       this.setShowQuestionResult(this.currentQuestion, response)
     },
     setShowQuestionResult(question, response) {
