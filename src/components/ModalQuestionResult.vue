@@ -2,9 +2,9 @@
   <div class="modal-backdrop">
     <div class="modal-wrapper">
       <!-- {{ questionResult }} -->
-      <h3>{{ getResult }}{{ getCorrectAnswer }}</h3>
-      <p class="p20">{{ questionResult?.question?.fact }}</p>
-      <AButton @click="$emit('next')">Next</AButton>
+      <h2>{{ getResult }}{{ getCorrectAnswer }}</h2>
+      <p class="p10">{{ questionResult?.question?.fact }}</p>
+      <AButton @click="$emit('next')">下一題</AButton>
     </div>
   </div>
 </template>
@@ -61,7 +61,7 @@ export default {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   max-width: 800px;
 }
-.p20 {
-  padding: 20px;
+.p10 {
+  padding: 10px;
 }
 </style>

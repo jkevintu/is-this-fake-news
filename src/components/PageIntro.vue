@@ -1,7 +1,9 @@
 <template>
   <div class="page-container">
     <h1>這是假消息嗎？</h1>
-    <AButton @click="$emit('next')">Next</AButton>
+    <AButton :loading="loading" :correct-type="true" @buttonClick="$emit('next')">
+      {{ loading ? 'Loading...' : '開始遊戲' }}
+    </AButton>
   </div>
 </template>
 
@@ -15,6 +17,7 @@ export default {
   },
   props: {
     currentQuestion: Object,
+    loading: Boolean,
   },
 }
 </script>

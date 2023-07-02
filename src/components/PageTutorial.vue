@@ -4,7 +4,7 @@
     <p class="p20">
       教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學
     </p>
-    <AButton @click="$emit('next')">Next</AButton>
+    <AButton :correct-type="true" @click="$emit('next')">開始</AButton>
   </div>
 </template>
 

@@ -3,11 +3,12 @@
     <div class="game-container">
       <!-- <div>Loading: {{ loading }}</div> -->
       <div class="step-container">
-        <PageIntro v-if="isStep(0)" @next="nextStep" />
+        <PageIntro v-if="isStep(0)" :loading="loading" @next="nextStep" />
         <PageTutorial v-if="isStep(1)" @next="nextStep" />
         <PageQuestion
           v-if="isStep(2)"
           :current-question="currentQuestion"
+          :loading="loading"
           @chooseNewsTrue="answerNews(true)"
           @chooseNewsFalse="answerNews(false)"
         />
@@ -97,12 +98,14 @@ export default {
     },
     async answerNews(response) {
       console.log('response', response)
+      this.loading = true
       await questionAPI.postEvent({
         user_id: this.userId,
         question_id: this.currentQuestion?.id,
         event: 'response',
         response: response,
       })
+      this.loading = false
       this.setShowQuestionResult(this.currentQuestion, response)
     },
     setShowQuestionResult(question, response) {

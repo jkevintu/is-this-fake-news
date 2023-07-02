@@ -1,5 +1,9 @@
 <template>
-  <div class="button-wrapper" :class="{ 'correct-type': correctType, 'incorrect-type': incorrectType }">
+  <div
+    class="button-wrapper"
+    :class="{ 'correct-type': correctType, 'incorrect-type': incorrectType, loading: loading }"
+    @click="emitClick"
+  >
     <slot></slot>
     <span v-if="text">{{ text }}</span>
   </div>
@@ -20,6 +24,18 @@ export default {
     incorrectType: {
       type: Boolean,
       default: false,
+    },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  methods: {
+    emitClick() {
+      if (this.loading) {
+        return
+      }
+      this.$emit('buttonClick')
     },
   },
 }
@@ -45,6 +61,13 @@ export default {
     background-color: #b33434;
     border: 1px solid #b33434;
     color: white;
+  }
+  &:hover {
+    opacity: 0.8;
+  }
+  &.loading {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 </style>
