@@ -1,14 +1,12 @@
 <template>
   <div class="game-container">
     {{ currentStep }}
-    <PageIntro v-if="isStep(0)" />
-    <PageTutorial v-if="isStep(1)" />
-    <PageQuestion v-if="isStep(2)" />
-    <PageResult v-if="isStep(3)" />
-    <div v-if="currentStep < MAX_STEP">
-      <button @click="nextStep">Start</button>
-    </div>
-
+    <div class="step-container">
+      <PageIntro v-if="isStep(0)" @next="nextStep"/>
+      <PageTutorial v-if="isStep(1)" @next="nextStep" />
+      <PageQuestion v-if="isStep(2)" @chooseNewsTrue="chooseNews(true)" @chooseNewsFalse="chooseNews(false)" />
+      <PageResult v-if="isStep(3)" />
+     </div>
   </div>
 
 </template>
