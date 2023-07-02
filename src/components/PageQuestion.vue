@@ -7,8 +7,8 @@
     </div>
     <!-- {{ currentQuestion }} -->
     <div class="answer-wrapper">
-      <AButton :button-type="true" @click="$emit('chooseNewsTrue')">正確</AButton>
-      <AButton :button-type="false" @click="$emit('chooseNewsFalse')">錯誤</AButton>
+      <AButton :correct-type="true" @click="$emit('chooseNewsTrue')">正確</AButton>
+      <AButton :incorrect-type="true" @click="$emit('chooseNewsFalse')">錯誤</AButton>
     </div>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
-  <div class="button-wrapper">
-    <slot />
-    <span>{{ text }}</span>
+  <div class="button-wrapper" :class="{ 'correct-type': correctType, 'incorrect-type': incorrectType }">
+    <slot></slot>
+    <span v-if="text">{{ text }}</span>
   </div>
 </template>
 
@@ -9,19 +9,17 @@
 export default {
   name: 'AButton',
   props: {
-    text: String,
-    buttonType: Boolean,
-  },
-  methods: {
-    isType(type) {
-      console.log(type, this.buttonType)
-      if (type === true) {
-        return true
-      }
-      if (type === false) {
-        return false
-      }
-      return null
+    text: {
+      type: String,
+      default: '',
+    },
+    correctType: {
+      type: Boolean,
+      default: false,
+    },
+    incorrectType: {
+      type: Boolean,
+      default: false,
     },
   },
 }
@@ -38,12 +36,14 @@ export default {
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s;
-  &.true-type {
+
+  &.correct-type {
     background-color: #42b983;
     color: #fff;
   }
-  &.false-type {
+  &.incorrect-type {
     background-color: #b33434;
+    border: 1px solid #b33434;
     color: white;
   }
 }

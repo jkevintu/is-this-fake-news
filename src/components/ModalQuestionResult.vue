@@ -1,7 +1,7 @@
 <template>
   <div class="modal-backdrop">
     <div class="modal-wrapper">
-      {{ questionResult }}
+      <!-- {{ questionResult }} -->
       <h3>{{ getResult }}{{ getCorrectAnswer }}</h3>
       <p class="p20">{{ questionResult?.question?.fact }}</p>
       <AButton @click="$emit('next')">Next</AButton>
