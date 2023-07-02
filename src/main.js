@@ -1,5 +1,9 @@
 import { createApp } from 'vue'
 
+import axiosPlugin from '@/plugins/axios'
+
 import App from './App.vue'
 
-createApp(App).mount('#app')
+const app = createApp(App)
+app.use(axiosPlugin)
+app.mount('#app')

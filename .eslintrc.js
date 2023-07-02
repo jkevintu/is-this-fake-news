@@ -78,6 +78,7 @@ module.exports = {
         destructuring: 'all',
       },
     ],
+    'no-unused-vars': 'off',
     'simple-import-sort/exports': 'error',
     'simple-import-sort/imports': [
       'error',

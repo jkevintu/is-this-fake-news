@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import { getQuestions } from '../api/questions'
+
 import ModalQuestionResult from './ModalQuestionResult.vue'
 import PageIntro from './PageIntro.vue'
 import PageQuestion from './PageQuestion.vue'
@@ -55,6 +57,7 @@ export default {
       return this.questions?.[this.questionIndex]
     },
   },
+  created() {},
   methods: {
     nextStep() {
       this.step++
