@@ -1,5 +1,5 @@
 <template>
-  <div class="question-container">
+  <div class="page-container">
     <h1>這是假消息嗎？</h1>
     <AButton @click="$emit('next')">Next</AButton>
   </div>
@@ -21,5 +21,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 </style>

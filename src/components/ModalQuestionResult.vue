@@ -1,7 +1,7 @@
 <template>
   <div class="modal-backdrop">
     <div class="modal-wrapper">
-      {{ questionResult }}
+      <p>{{ questionResult?.question?.fact }}</p>
       <AButton @click="$emit('next')">Next</AButton>
     </div>
   </div>
@@ -37,10 +37,12 @@ export default {
 .modal-wrapper {
   display: flex;
   flex-direction: column;
+  align-items: center;
   border: 1px solid #ccc;
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  max-width: 800px;
 }
 </style>
