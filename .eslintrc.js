@@ -8,7 +8,7 @@ module.exports = {
   plugins: ['import', 'prettier', 'simple-import-sort','vue'],
   extends: ['eslint:recommended', 'plugin:vue/recommended', 'plugin:prettier-vue/recommended'],
   parserOptions: {
-    parser: 'babel-eslint',
+    parser: '@babel/eslint-parser',
   },
   settings: {
     // See https://www.npmjs.com/package/eslint-plugin-prettier-vue for configuation options
@@ -67,12 +67,7 @@ module.exports = {
     'import/first': 'error',
     'import/newline-after-import': 'error',
     'import/no-duplicates': 'error',
-    'no-console': [
-      'error',
-      {
-        allow: ['warn', 'error'],
-      },
-    ],
+    'no-console': 'off',
     'no-empty': 'off',
     'no-empty-function': 'off',
     'no-undef': 'warn',
