@@ -1,7 +1,7 @@
 <template>
   <div class="game-wrapper">
     <div class="game-container">
-      <div>Loading: {{ loading }}</div>
+      <!-- <div>Loading: {{ loading }}</div> -->
       <div class="step-container">
         <PageIntro v-if="isStep(0)" @next="nextStep" />
         <PageTutorial v-if="isStep(1)" @next="nextStep" />
@@ -16,7 +16,7 @@
           :question-result="questionResult"
           @next="closeQuestionModalAndNextStep"
         />
-        <PageResult v-if="isStep(3)" @restart="step = 0" />
+        <PageResult v-if="isStep(3)" @restart="restartGame" />
       </div>
     </div>
   </div>
@@ -103,6 +103,10 @@ export default {
         return
       }
       this.nextQuestion()
+    },
+    restartGame() {
+      this.step = 0
+      this.questionIndex = 0
     },
   },
 }

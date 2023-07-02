@@ -1,8 +1,8 @@
 <template>
   <div class="page-container">
     <div>
-      <h2>這是假新聞嗎？</h2>
-      <h3>{{ currentQuestion?.news_title }}</h3>
+      <h2>這是假消息嗎？</h2>
+      <h3 class="p20">{{ currentQuestion?.news_title }}</h3>
       <image :src="currentQuestion?.img_url"></image>
     </div>
     <!-- {{ currentQuestion }} -->
@@ -29,10 +29,18 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 .page-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.p20 {
+  padding: 20px;
+}
+.answer-wrapper {
+  > div:not(:first-child) {
+    margin-top: 10px;
+  }
 }
 </style>

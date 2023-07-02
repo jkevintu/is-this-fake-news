@@ -1,7 +1,7 @@
 <template>
   <div class="page-container">
     <h1>假消息教學</h1>
-    <p>
+    <p class="p20">
       教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學
     </p>
     <AButton @click="$emit('next')">Next</AButton>
@@ -28,5 +28,8 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.p20 {
+  padding: 20px;
 }
 </style>
