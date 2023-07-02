@@ -1,16 +1,23 @@
 <template>
   <div class="game-container">
     {{ currentStep }}
+    {{ showQuestionResult }}
     <div class="step-container">
       <PageIntro v-if="isStep(0)" @next="nextStep" />
       <PageTutorial v-if="isStep(1)" @next="nextStep" />
-      <PageQuestion v-if="isStep(2)" @chooseNewsTrue="chooseNews(true)" @chooseNewsFalse="chooseNews(false)" />
+      <PageQuestion v-if="isStep(2)" @chooseNewsTrue="answerNews(true)" @chooseNewsFalse="answerNews(false)" />
+      <ModalQuestionResult
+        v-if="showQuestionResult"
+        :question-result="questionResult"
+        @next="closeQuestionModalAndNextStep"
+      />
       <PageResult v-if="isStep(3)" />
     </div>
   </div>
 </template>
 
 <script>
+import ModalQuestionResult from './ModalQuestionResult.vue'
 import PageIntro from './PageIntro.vue'
 import PageQuestion from './PageQuestion.vue'
 import PageResult from './PageResult.vue'
@@ -25,6 +32,7 @@ export default {
     PageTutorial,
     PageQuestion,
     PageResult,
+    ModalQuestionResult,
   },
   data() {
     return {
@@ -32,6 +40,11 @@ export default {
       questionIndex: 0,
       questions: [],
       MAX_STEP: MAX_STEP,
+      showQuestionResult: false,
+      questionResult: {
+        question: null,
+        response: null,
+      },
     }
   },
   computed: {
@@ -39,7 +52,7 @@ export default {
       return this.step
     },
     currentQuestion() {
-      return this.questions[this.questionIndex]
+      return this.questions?.[this.questionIndex]
     },
   },
   methods: {
@@ -49,8 +62,20 @@ export default {
     isStep(step) {
       return this.currentStep === step
     },
-    chooseNews(response) {
+    answerNews(response) {
       console.log('response', response)
+      this.setShowQuestionResult(this.currentQuestion, response)
+    },
+    setShowQuestionResult(question, response) {
+      this.questionResult = {
+        question,
+        response,
+      }
+      this.showQuestionResult = true
+    },
+    closeQuestionModalAndNextStep() {
+      this.showQuestionResult = false
+      this.nextStep()
     },
   },
 }

@@ -1,0 +1,46 @@
+<template>
+  <div class="modal-backdrop">
+    <div class="modal-wrapper">
+      {{ questionResult }}
+      <AButton @click="$emit('next')">Next</AButton>
+    </div>
+  </div>
+</template>
+
+<script>
+import AButton from './AButton.vue'
+
+export default {
+  name: 'ModalQuestionResult',
+  components: {
+    AButton,
+  },
+  props: {
+    questionResult: Object,
+  },
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+.modal-backdrop {
+  display: flex;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+.modal-wrapper {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+</style>
