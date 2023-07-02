@@ -5,10 +5,11 @@ module.exports = {
     node: true,
     browser: true,
   },
-  plugins: ['import', 'prettier', 'simple-import-sort','vue'],
+  plugins: ['import', 'prettier', 'simple-import-sort', 'vue'],
   extends: ['eslint:recommended', 'plugin:vue/recommended', 'plugin:prettier-vue/recommended'],
   parserOptions: {
     parser: '@babel/eslint-parser',
+    requireConfigFile: false,
   },
   settings: {
     // See https://www.npmjs.com/package/eslint-plugin-prettier-vue for configuation options

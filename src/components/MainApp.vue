@@ -49,6 +49,9 @@ export default {
     isStep(step) {
       return this.currentStep === step
     },
+    chooseNews(response) {
+      console.log('response', response)
+    },
   },
 }
 </script>
