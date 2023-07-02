@@ -1,26 +1,25 @@
 <template>
   <div class="question-container">
-     {{ currentQuestion }}
+    {{ currentQuestion }}
     <div class="answer-wrapper">
-    <AButton @click="$emit('chooseNewsTrue')" :buttonType="true">正確</AButton>
-    <AButton @click="$emit('chooseNewsFalse')" :buttonType="false">錯誤</AButton>
+      <AButton :button-type="true" @click="$emit('chooseNewsTrue')">正確</AButton>
+      <AButton :button-type="false" @click="$emit('chooseNewsFalse')">錯誤</AButton>
     </div>
-   </div>
-
- </template>
+  </div>
+</template>
 
  <script>
 import AButton from './AButton.vue'
- export default {
+
+export default {
   name: 'PageQuestion',
   components: {
-    AButton
+    AButton,
   },
 
   props: {
-    currentQuestion: Object
+    currentQuestion: Object,
   },
-
 }
 </script>
 

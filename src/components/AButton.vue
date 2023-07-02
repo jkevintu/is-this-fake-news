@@ -1,5 +1,5 @@
 <template>
-  <div class="button-wrapper" >
+  <div class="button-wrapper">
     <slot />
     <span>{{ text }}</span>
   </div>
@@ -10,17 +10,20 @@ export default {
   name: 'AButton',
   props: {
     text: String,
-    buttonType: Boolean
+    buttonType: Boolean,
   },
   methods: {
     isType(type) {
       console.log(type, this.buttonType)
-      if (type === true) return true
-      if (type === false) return false
+      if (type === true) {
+        return true
+      }
+      if (type === false) {
+        return false
+      }
       return null
-    }
-  }
-
+    },
+  },
 }
 </script>
 

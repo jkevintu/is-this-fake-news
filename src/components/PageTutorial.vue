@@ -2,21 +2,20 @@
   <div class="question-container">
     <h1>假消息教學</h1>
     <AButton @click="$emit('next')">Next</AButton>
-   </div>
-
- </template>
+  </div>
+</template>
 
  <script>
 import AButton from './AButton.vue'
- export default {
+
+export default {
   name: 'PageTutorial',
   components: {
-    AButton
+    AButton,
   },
   props: {
-    currentQuestion: Object
+    currentQuestion: Object,
   },
-
 }
 </script>
 

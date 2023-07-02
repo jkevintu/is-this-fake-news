@@ -1,17 +1,13 @@
 <template>
-  <div class="question-container">
-    PageResult
-  </div>
-
+  <div class="question-container">PageResult</div>
 </template>
 
 <script>
 export default {
   name: 'MainApp',
   props: {
-    currentQuestion: Object
+    currentQuestion: Object,
   },
-
 }
 </script>
 
