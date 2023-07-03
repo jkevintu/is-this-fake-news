@@ -28,13 +28,26 @@
             />
             <span class="like-number">{{ likeCount() }}</span>
           </div>
+          <div class="responses-wrapper">
+            <!-- -->
+            <div v-for="comment in fakeResponse" :key="comment?.id" class="response">
+              <div class="response-profile">
+                <img src="https://holyspiritchurch.us/wp-content/uploads/facebook-profile-blank-face.jpeg" />
+              </div>
+              <div class="response-content">
+                <div class="response-name">{{ comment?.user_name }}</div>
+                <div class="response-text">{{ comment?.user_comment }}</div>
+              </div>
+            </div>
+            <!-- -->
+          </div>
         </div>
       </div>
-    </div>
-    <!-- {{ currentQuestion }} -->
-    <div class="answer-wrapper">
-      <AButton :correct-type="true" :loading="loading" @buttonClick="$emit('chooseNewsTrue')">是真的吧</AButton>
-      <AButton :incorrect-type="true" :loading="loading" @buttonClick="$emit('chooseNewsFalse')">是假消息</AButton>
+      <!-- {{ currentQuestion }} -->
+      <div class="answer-wrapper">
+        <AButton :correct-type="true" :loading="loading" @buttonClick="$emit('chooseNewsTrue')">是真的吧</AButton>
+        <AButton :incorrect-type="true" :loading="loading" @buttonClick="$emit('chooseNewsFalse')">是假消息</AButton>
+      </div>
     </div>
   </div>
 </template>
@@ -43,7 +56,7 @@
 import AButton from './AButton.vue'
 
 export default {
-  name: 'PageQuestion',
+  name: 'PageQuestionFacebook',
   components: {
     AButton,
   },
@@ -51,15 +64,24 @@ export default {
     currentQuestion: Object,
     loading: Boolean,
     fakeMediaProvider: Array,
+    fakeResponseProvider: Array,
     scene: Object,
   },
   data() {
-    return { randomFakeMedia: this.getRandomFakeMedia() }
+    return { randomFakeMedia: this.getRandomFakeMedia(), fakeResponse: [], fakeResponseInterval: null }
   },
   watch: {
     currentQuestion() {
       this.randomFakeMedia = this.getRandomFakeMedia()
+      this.fakeResponse = []
     },
+  },
+  created() {
+    const randomTime = Math.floor(Math.random() * 1500) + 100
+    this.fakeResponseInterval = setInterval(this.addFakeResponse, randomTime)
+  },
+  beforeUnmount() {
+    clearInterval(this.fakeResponseInterval)
   },
   methods: {
     likeCount() {
@@ -68,6 +90,13 @@ export default {
     getRandomFakeMedia() {
       const randomIndex = Math.floor(Math.random() * this.fakeMediaProvider.length)
       return this.fakeMediaProvider[randomIndex]
+    },
+    addFakeResponse() {
+      console.log(this.fakeResponseProvider[Math.floor(Math.random() * this.fakeResponseProvider.length)])
+      this.fakeResponse = [
+        ...this.fakeResponse,
+        this.fakeResponseProvider[Math.floor(Math.random() * this.fakeResponseProvider.length)],
+      ]
     },
   },
 }
@@ -101,12 +130,10 @@ export default {
   overflow-y: auto;
   flex: 1;
 }
-.answer-wrapper {
-  // flex: 1;
-}
 .facebook-wrapper {
   width: 100%;
   margin-bottom: 20px;
+  overflow-y: auto;
 }
 .facebook-container {
   margin: 20px;
@@ -155,6 +182,45 @@ export default {
     font-size: 15px;
     color: #65676b;
     padding-left: 4px;
+  }
+}
+.responses-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 4em;
+  max-height: 10em;
+  overflow-y: hidden;
+  animation: all 0.3s ease-in-out;
+}
+.response {
+  display: flex;
+  margin: 4px 0 0 16px;
+  .response-profile {
+    padding-right: 6px;
+    img {
+      border: 0.5px solid rgba(0, 0, 0, 0.2);
+      border-radius: 16px;
+      width: 32px;
+      height: 32px;
+      object-fit: cover;
+    }
+  }
+  .response-content {
+    background: #f0f2f5;
+    padding: 8px 12px;
+    border-radius: 16px;
+    text-align: left;
+    margin-bottom: 10px;
+    color: #050505;
+    .response-name {
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 16px;
+    }
+    .response-content {
+      font-size: 15px;
+    }
   }
 }
 </style>

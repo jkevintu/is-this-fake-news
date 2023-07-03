@@ -15,6 +15,7 @@
         <PageQuestionFacebook
           v-if="isStep(2)"
           :fake-media-provider="fakeMediaProvider"
+          :fake-response-provider="fakeResponse"
           :current-question="currentQuestion"
           :loading="loading"
           :scene="scene"
@@ -70,6 +71,7 @@ export default {
       questionIndex: 0,
       questions: [],
       fakeMediaProvider: [],
+      fakeResponse: [],
       MAX_STEP: MAX_STEP,
       showQuestionResult: false,
       questionResult: {
@@ -103,6 +105,7 @@ export default {
     this.loading = true
     this.loadQuestions()
     this.loadFakeMedia()
+    this.loadFakeResponse()
   },
   beforeDestroy() {
     this.clearInterval()
@@ -119,6 +122,11 @@ export default {
     async loadFakeMedia() {
       const fakeMediaProvider = await questionAPI.getFakeMedia()
       this.fakeMediaProvider = fakeMediaProvider
+    },
+    async loadFakeResponse() {
+      const fakeResponse = await questionAPI.getFakeResponse()
+      console.log(fakeResponse)
+      this.fakeResponse = fakeResponse
     },
     nextStep() {
       this.step++

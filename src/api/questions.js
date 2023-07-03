@@ -38,7 +38,7 @@ export default {
         .catch((err) => {})
     })
   },
-  getComments: () => {
+  getFakeResponse: () => {
     return new Promise((resolve, reject) => {
       fetch(`${APIS.questionURL()}?sheet=2`)
         .then((res) => res.json())
