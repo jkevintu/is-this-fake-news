@@ -151,6 +151,11 @@ export default {
       return this.currentStep === step
     },
     expand() {
+      questionAPI.postEvent({
+        user_id: this.userId,
+        question_id: this.currentQuestion?.id,
+        event: 'expand_detail',
+      })
       this.showDetails = true
     },
     close() {
