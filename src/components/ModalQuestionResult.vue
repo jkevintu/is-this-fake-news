@@ -28,7 +28,7 @@ export default {
   },
   computed: {
     percentageToText() {
-      return `${this.samePercentage.toFixed(2) * 100}%`
+      return `${parseInt(this.samePercentage.toFixed(2) * 100)}%`
     },
     samePercentage() {
       if (this.isCorrect) {

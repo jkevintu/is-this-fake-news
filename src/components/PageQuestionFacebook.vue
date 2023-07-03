@@ -2,6 +2,7 @@
   <div class="page-container">
     <div class="question-container w100">
       <h2>這是假消息嗎？</h2>
+      <!-- {{ scene }} -->
       <div class="facebook-wrapper">
         <div class="facebook-container">
           <div class="profile-wrapper">
@@ -50,6 +51,7 @@ export default {
     currentQuestion: Object,
     loading: Boolean,
     fakeMediaProvider: Array,
+    scene: Object,
   },
   data() {
     return { randomFakeMedia: this.getRandomFakeMedia() }
@@ -94,14 +96,17 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100%;
+  justify-content: flex-start;
   background: #f0f2f5;
+  overflow-y: auto;
+  flex: 1;
+}
+.answer-wrapper {
+  // flex: 1;
 }
 .facebook-wrapper {
-  height: 100%;
   width: 100%;
-  overflow-y: auto;
+  margin-bottom: 20px;
 }
 .facebook-container {
   margin: 20px;

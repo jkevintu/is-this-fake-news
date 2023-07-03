@@ -17,6 +17,7 @@
           :fake-media-provider="fakeMediaProvider"
           :current-question="currentQuestion"
           :loading="loading"
+          :scene="scene"
           @chooseNewsTrue="answerNews(true)"
           @chooseNewsFalse="answerNews(false)"
         />
