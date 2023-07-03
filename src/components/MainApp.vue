@@ -6,14 +6,15 @@
         <PageIntro v-if="isStep(0)" :loading="loading" @next="nextStep" />
         <PageTutorial v-if="isStep(1)" @next="nextStep" />
         <PageQuestion
-          v-if="false"
+          v-if="isStep(2)"
           :current-question="currentQuestion"
           :loading="loading"
+          @expandDetails="expand"
           @chooseNewsTrue="answerNews(true)"
           @chooseNewsFalse="answerNews(false)"
         />
         <PageQuestionFacebook
-          v-if="isStep(2)"
+          v-if="false"
           :fake-media-provider="fakeMediaProvider"
           :fake-response-provider="fakeResponse"
           :current-question="currentQuestion"
@@ -22,6 +23,7 @@
           @chooseNewsTrue="answerNews(true)"
           @chooseNewsFalse="answerNews(false)"
         />
+        <ModalExpand v-if="showDetails" :question-result="questionResult" @closeDetails="close" />
         <ModalQuestionResult
           v-if="showQuestionResult"
           :question-result="questionResult"
@@ -45,6 +47,7 @@ import questionAPI from '../api/questions'
 import { generateUUID } from '../utils/common'
 import Cookies from '../utils/cookies'
 
+import ModalExpand from './ModalExpand.vue'
 import ModalQuestionResult from './ModalQuestionResult.vue'
 import PageIntro from './PageIntro.vue'
 import PageQuestion from './PageQuestion.vue'
@@ -60,6 +63,7 @@ export default {
     PageIntro,
     PageTutorial,
     PageQuestion,
+    ModalExpand,
     PageResult,
     ModalQuestionResult,
     PageQuestionFacebook,
@@ -74,6 +78,7 @@ export default {
       fakeResponse: [],
       MAX_STEP: MAX_STEP,
       showQuestionResult: false,
+      showDetails: false,
       questionResult: {
         question: null,
         response: null,
@@ -143,6 +148,12 @@ export default {
     },
     isStep(step) {
       return this.currentStep === step
+    },
+    expand() {
+      this.showDetail = true
+    },
+    close() {
+      this.showDetail = false
     },
     async answerNews(response) {
       console.log('response', response)
