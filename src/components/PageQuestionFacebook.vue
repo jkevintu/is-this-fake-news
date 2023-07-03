@@ -1,7 +1,7 @@
 <template>
   <div class="page-container">
     <div class="question-container w100">
-      <h2>這是假消息嗎？</h2>
+      <h2>這是假消息嗎？({{ currentQuestionProgress }})</h2>
       <!-- {{ scene }} -->
       <div class="facebook-wrapper">
         <div class="facebook-container">
@@ -66,6 +66,7 @@ export default {
     fakeMediaProvider: Array,
     fakeResponseProvider: Array,
     scene: Object,
+    currentQuestionProgress: String,
   },
   data() {
     return { randomFakeMedia: this.getRandomFakeMedia(), fakeResponse: [], fakeResponseInterval: null }

@@ -5,8 +5,10 @@
         <h1 class="animation" :class="{ show: showAfter(0) }">最後結果</h1>
       </div>
       <div class="result-wrapper">
-        <div class="animation result-text" :class="{ show: showAfter(1) }">你答對了 {{ correctCount }} 題</div>
-        <div class="animation result-text" :class="{ show: showAfter(2.2) }">你的靈魂動物是 ...</div>
+        <div class="animation result-text" :class="{ show: showAfter(1) }">
+          假消息防衛隊，你答對了 {{ correctCount }} 題
+        </div>
+        <div class="animation result-text" :class="{ show: showAfter(2.2) }">你的夥伴動物是 ...</div>
         <div class="result-reveal animation" :class="{ show: showAfter(4) }">
           <div class="result-text big">{{ spiritAnimal }}</div>
           <div class="result-image">
@@ -104,14 +106,14 @@ export default {
       return 'https://i.imgur.com/rVMVlIz.png'
     },
     getShareQuote() {
-      return `我的靈魂動物是${this.spiritAnimal}！你也來測測看吧！`
+      return `現今假消息泛濫，你看到的新聞到底是真的假的？一起來當假消息搜查隊，看看你的夥伴動物是誰吧！我的靈魂動物是${this.spiritAnimal}！`
     },
     sharingWebsiteInfo() {
       return {
         url: this.spiritAnimalImgUrl,
         title: this.getShareQuote,
         quote: this.getShareQuote,
-        hashtags: '#這是假消息嗎？ #靈魂動物測驗 #2023',
+        hashtags: '#這是假消息嗎？ #夥伴動物測驗 #2023USTaiwanWatch',
         twitterUser: 'ustaiwanwatch',
       }
     },

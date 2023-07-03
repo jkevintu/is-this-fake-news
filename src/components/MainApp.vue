@@ -20,6 +20,7 @@
           :current-question="currentQuestion"
           :loading="loading"
           :scene="scene"
+          :current-question-progress="currentQuestionProgress"
           @expandDetails="expand"
           @chooseNewsTrue="answerNews(true)"
           @chooseNewsFalse="answerNews(false)"
@@ -97,6 +98,9 @@ export default {
     },
     currentQuestion() {
       return this.questions?.[this.questionIndex]
+    },
+    currentQuestionProgress() {
+      return `${this.questionIndex + 1}/${this.questions.length}`
     },
   },
   created() {
