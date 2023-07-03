@@ -5,7 +5,7 @@
         <h2>這是假消息嗎？</h2>
         <div class="news-title p20">{{ currentQuestion?.news_title }}</div>
         <div class="mb10 max-image-wrapper">
-          <img :src="currentQuestion?.img_url" />
+          <img :src="currentQuestion?.img_url" @click="$emit('expandDetails')" />
         </div>
       </div>
     </div>

@@ -9,6 +9,7 @@
           v-if="false"
           :current-question="currentQuestion"
           :loading="loading"
+          @expandDetails="expand"
           @chooseNewsTrue="answerNews(true)"
           @chooseNewsFalse="answerNews(false)"
         />
@@ -19,9 +20,11 @@
           :current-question="currentQuestion"
           :loading="loading"
           :scene="scene"
+          @expandDetails="expand"
           @chooseNewsTrue="answerNews(true)"
           @chooseNewsFalse="answerNews(false)"
         />
+        <ModalExpand v-if="showDetails" :current-question="currentQuestion" @closeDetails="close" />
         <ModalQuestionResult
           v-if="showQuestionResult"
           :question-result="questionResult"
@@ -45,6 +48,7 @@ import questionAPI from '../api/questions'
 import { generateUUID } from '../utils/common'
 import Cookies from '../utils/cookies'
 
+import ModalExpand from './ModalExpand.vue'
 import ModalQuestionResult from './ModalQuestionResult.vue'
 import PageIntro from './PageIntro.vue'
 import PageQuestion from './PageQuestion.vue'
@@ -60,6 +64,7 @@ export default {
     PageIntro,
     PageTutorial,
     PageQuestion,
+    ModalExpand,
     PageResult,
     ModalQuestionResult,
     PageQuestionFacebook,
@@ -74,6 +79,7 @@ export default {
       fakeResponse: [],
       MAX_STEP: MAX_STEP,
       showQuestionResult: false,
+      showDetails: false,
       questionResult: {
         question: null,
         response: null,
@@ -143,6 +149,17 @@ export default {
     },
     isStep(step) {
       return this.currentStep === step
+    },
+    expand() {
+      questionAPI.postEvent({
+        user_id: this.userId,
+        question_id: this.currentQuestion?.id,
+        event: 'expand_detail',
+      })
+      this.showDetails = true
+    },
+    close() {
+      this.showDetails = false
     },
     async answerNews(response) {
       console.log('response', response)
