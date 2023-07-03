@@ -5,11 +5,13 @@
       <div class="result-title" :class="{ correct: isCorrect, incorrect: !isCorrect }">
         {{ getResult }}{{ getCorrectAnswer }}
       </div>
-      <p class="p10">{{ questionResult?.question?.fact }}</p>
-      <p class="p10">
-        <span class="percentange">{{ percentageToText }}</span
-        >的人也跟你一樣{{ getResultText }}
-      </p>
+      <div class="result-fact">
+        <p class="p10">{{ questionResult?.question?.fact }}</p>
+        <p class="p10">
+          <span class="percentange">{{ percentageToText }}</span
+          >的人也跟你一樣{{ getResultText }}
+        </p>
+      </div>
       <AButton :correct-type="true" @click="$emit('next')">下一題</AButton>
     </div>
   </div>
@@ -78,17 +80,10 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.modal-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  max-width: 800px;
-  margin: 0 20px;
+
+.result-fact {
+  overflow-y: auto;
+  font-size: 14px;
 }
 .result-title {
   font-size: 24px;

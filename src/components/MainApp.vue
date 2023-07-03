@@ -243,6 +243,20 @@ export default {
 }
 </style>
 <style lang="scss">
+.modal-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  max-width: 800px;
+  margin: 0 20px;
+  max-height: calc(100% - 40px);
+}
+
 .page-container {
   display: flex;
   flex-direction: column;
