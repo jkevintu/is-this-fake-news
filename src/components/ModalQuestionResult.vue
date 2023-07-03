@@ -2,7 +2,9 @@
   <div class="modal-backdrop">
     <div class="modal-wrapper">
       <!-- {{ questionResult }} -->
-      <h2>{{ getResult }}{{ getCorrectAnswer }}</h2>
+      <div class="result-title" :class="{ correct: isCorrect, incorrect: !isCorrect }">
+        {{ getResult }}{{ getCorrectAnswer }}
+      </div>
       <p class="p10">{{ questionResult?.question?.fact }}</p>
       <AButton :correct-type="true" @click="$emit('next')">下一題</AButton>
     </div>
@@ -21,8 +23,11 @@ export default {
     questionResult: Object,
   },
   computed: {
+    isCorrect() {
+      return this.questionResult?.question?.correct_answer === this.questionResult.response
+    },
     getResult() {
-      if (this.questionResult?.question?.correct_answer === this.questionResult.response) {
+      if (this.isCorrect) {
         return '恭喜你答對了！'
       }
       return '答錯了，'
@@ -38,7 +43,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
 .modal-backdrop {
   display: flex;
   top: 0;
@@ -61,6 +66,18 @@ export default {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   max-width: 800px;
   margin: 0 20px;
+}
+.result-title {
+  font-size: 24px;
+  padding: 15px 20px;
+  border-radius: 10px;
+  color: white;
+  &.correct {
+    background: #28a745;
+  }
+  &.incorrect {
+    background: #dc3545;
+  }
 }
 .p10 {
   padding: 10px;
