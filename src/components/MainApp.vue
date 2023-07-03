@@ -148,8 +148,8 @@ export default {
     closeQuestionModalAndNextStep() {
       this.showQuestionResult = false
       // DEBUG
-      this.nextStep()
-      return
+      // this.nextStep()
+      // return
       // DEBUG
       if (this.questionIndex === this.questions.length - 1) {
         this.nextStep()

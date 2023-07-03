@@ -16,7 +16,6 @@
       </div>
       <!-- <div class="debug">{{ questions }}</div> -->
       <div class="actions-wrapper animation" :class="{ show: showAfter(5) }">
-        <div>分享結果</div>
         <ShareNetwork
           v-for="network in shareNetwork"
           :key="network.network"
@@ -29,7 +28,7 @@
           :hashtags="sharingWebsiteInfo.hashtags"
         >
           <i :class="network.icon"></i>
-          <span>{{ network.name }}</span>
+          <span>分享結果到 {{ network.name }} </span>
         </ShareNetwork>
       </div>
     </div>
@@ -72,12 +71,12 @@ export default {
           icon: 'fab fah fa-lg fa-line',
           color: '#00c300',
         },
-        {
-          network: 'twitter',
-          name: 'Twitter',
-          icon: 'fab fah fa-lg fa-twitter',
-          color: '#1da1f2',
-        },
+        // {
+        //   network: 'twitter',
+        //   name: 'Twitter',
+        //   icon: 'fab fah fa-lg fa-twitter',
+        //   color: '#1da1f2',
+        // },
       ],
     }
   },
@@ -183,6 +182,7 @@ export default {
     align-items: center;
     border-radius: 5px;
     font-size: 16px;
+    font-weight: bold;
   }
 }
 </style>
