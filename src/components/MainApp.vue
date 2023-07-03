@@ -17,7 +17,14 @@
           :question-result="questionResult"
           @next="closeQuestionModalAndNextStep"
         />
-        <PageResult v-if="isStep(3)" :scene="scene" :questions="questions" @restart="restartGame" @share="share" />
+        <PageResult
+          v-if="isStep(3)"
+          :scene="scene"
+          :questions="questions"
+          @restart="restartGame"
+          @share="share"
+          @reset="reset"
+        />
       </div>
     </div>
   </div>
@@ -153,6 +160,9 @@ export default {
     restartGame() {
       this.step = 0
       this.questionIndex = 0
+    },
+    reset() {
+      this.scene.milliseconds = 0
     },
     share(count) {
       // Share to social media: Facebook
