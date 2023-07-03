@@ -103,7 +103,7 @@ export default {
   }
 }
 .percentange {
-  font-weight: 900;
+  font-weight: bold;
   font-size: 24px;
   margin-right: 5px;
 }
