@@ -139,6 +139,7 @@ export default {
   display: flex;
   font-size: 14px;
   padding: 4px 16px 16px;
+  text-align: left;
 }
 .news-response {
   display: flex;
