@@ -84,7 +84,7 @@ export default {
       console.log(questionAPI)
       const questions = await questionAPI.getQuestions()
       console.log('questions', questions)
-      this.questions = questions
+      this.questions = questions.filter((q) => q.id)
       this.loading = false
     },
     nextStep() {
@@ -144,10 +144,20 @@ export default {
 .game-container {
   width: 100%;
   max-width: 800px;
-  min-height: 600px;
+  height: 100%;
   border: 1px solid #ccc;
   border-radius: 10px;
   background: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  @media screen and (min-width: 768px) {
+    max-height: calc(100% - 2em);
+  }
+}
+.step-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 </style>
