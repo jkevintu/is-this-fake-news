@@ -6,6 +6,13 @@
         <PageIntro v-if="isStep(0)" :loading="loading" @next="nextStep" />
         <PageTutorial v-if="isStep(1)" @next="nextStep" />
         <PageQuestion
+          v-if="false"
+          :current-question="currentQuestion"
+          :loading="loading"
+          @chooseNewsTrue="answerNews(true)"
+          @chooseNewsFalse="answerNews(false)"
+        />
+        <PageQuestionFacebook
           v-if="isStep(2)"
           :current-question="currentQuestion"
           :loading="loading"
@@ -38,6 +45,7 @@ import Cookies from '../utils/cookies'
 import ModalQuestionResult from './ModalQuestionResult.vue'
 import PageIntro from './PageIntro.vue'
 import PageQuestion from './PageQuestion.vue'
+import PageQuestionFacebook from './PageQuestionFacebook.vue'
 import PageResult from './PageResult.vue'
 import PageTutorial from './PageTutorial.vue'
 
@@ -51,6 +59,7 @@ export default {
     PageQuestion,
     PageResult,
     ModalQuestionResult,
+    PageQuestionFacebook,
   },
   data() {
     return {
@@ -199,7 +208,8 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  /* overflow: hidden; */
+  overflow-y: auto;
 }
 </style>
 <style lang="scss">
