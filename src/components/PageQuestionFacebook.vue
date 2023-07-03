@@ -6,12 +6,10 @@
         <div class="facebook-container">
           <div class="profile-wrapper">
             <div class="profile-pic">
-              <img
-                src="https://scontent-lga3-2.xx.fbcdn.net/v/t39.30808-6/351475348_149719274766311_1774459271332022944_n.jpg?_nc_cat=1&cb=99be929b-3346023f&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=_gC1KfA5Hp4AX-eKFZK&_nc_ht=scontent-lga3-2.xx&oh=00_AfANvZUK4UE_G8DfzfzvP34hFCvhuoJSSHu5dB-Sji_4gQ&oe=64A73D24"
-              />
+              <img :src="randomFakeMedia.media_url" />
             </div>
             <div class="profile-info-wrapper">
-              <div class="profile-info">TVBS 新聞</div>
+              <div class="profile-info">{{ randomFakeMedia.media_name }}</div>
               <div>20m ago</div>
             </div>
           </div>
@@ -48,14 +46,26 @@ export default {
   components: {
     AButton,
   },
-
   props: {
     currentQuestion: Object,
     loading: Boolean,
+    fakeMediaProvider: Array,
+  },
+  data() {
+    return { randomFakeMedia: this.getRandomFakeMedia() }
+  },
+  watch: {
+    currentQuestion() {
+      this.randomFakeMedia = this.getRandomFakeMedia()
+    },
   },
   methods: {
     likeCount() {
       return this.currentQuestion?.answer_total || 0
+    },
+    getRandomFakeMedia() {
+      const randomIndex = Math.floor(Math.random() * this.fakeMediaProvider.length)
+      return this.fakeMediaProvider[randomIndex]
     },
   },
 }
@@ -90,6 +100,7 @@ export default {
 }
 .facebook-wrapper {
   height: 100%;
+  width: 100%;
   overflow-y: auto;
 }
 .facebook-container {

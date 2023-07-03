@@ -14,6 +14,7 @@
         />
         <PageQuestionFacebook
           v-if="isStep(2)"
+          :fake-media-provider="fakeMediaProvider"
           :current-question="currentQuestion"
           :loading="loading"
           @chooseNewsTrue="answerNews(true)"
@@ -67,6 +68,7 @@ export default {
       step: 0,
       questionIndex: 0,
       questions: [],
+      fakeMediaProvider: [],
       MAX_STEP: MAX_STEP,
       showQuestionResult: false,
       questionResult: {
@@ -99,6 +101,7 @@ export default {
     // Load questions
     this.loading = true
     this.loadQuestions()
+    this.loadFakeMedia()
   },
   beforeDestroy() {
     this.clearInterval()
@@ -111,6 +114,10 @@ export default {
       // Filter empty question without id
       this.questions = questions.filter((q) => q.id)
       this.loading = false
+    },
+    async loadFakeMedia() {
+      const fakeMediaProvider = await questionAPI.getFakeMedia()
+      this.fakeMediaProvider = fakeMediaProvider
     },
     nextStep() {
       this.step++
