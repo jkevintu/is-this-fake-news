@@ -6,7 +6,15 @@
         <PageIntro v-if="isStep(0)" :loading="loading" @next="nextStep" />
         <PageTutorial v-if="isStep(1)" @next="nextStep" />
         <PageQuestion
+          v-if="false"
+          :current-question="currentQuestion"
+          :loading="loading"
+          @chooseNewsTrue="answerNews(true)"
+          @chooseNewsFalse="answerNews(false)"
+        />
+        <PageQuestionFacebook
           v-if="isStep(2)"
+          :fake-media-provider="fakeMediaProvider"
           :current-question="currentQuestion"
           :loading="loading"
           @chooseNewsTrue="answerNews(true)"
@@ -38,6 +46,7 @@ import Cookies from '../utils/cookies'
 import ModalQuestionResult from './ModalQuestionResult.vue'
 import PageIntro from './PageIntro.vue'
 import PageQuestion from './PageQuestion.vue'
+import PageQuestionFacebook from './PageQuestionFacebook.vue'
 import PageResult from './PageResult.vue'
 import PageTutorial from './PageTutorial.vue'
 
@@ -51,6 +60,7 @@ export default {
     PageQuestion,
     PageResult,
     ModalQuestionResult,
+    PageQuestionFacebook,
   },
   data() {
     return {
@@ -58,6 +68,7 @@ export default {
       step: 0,
       questionIndex: 0,
       questions: [],
+      fakeMediaProvider: [],
       MAX_STEP: MAX_STEP,
       showQuestionResult: false,
       questionResult: {
@@ -90,6 +101,7 @@ export default {
     // Load questions
     this.loading = true
     this.loadQuestions()
+    this.loadFakeMedia()
   },
   beforeDestroy() {
     this.clearInterval()
@@ -102,6 +114,10 @@ export default {
       // Filter empty question without id
       this.questions = questions.filter((q) => q.id)
       this.loading = false
+    },
+    async loadFakeMedia() {
+      const fakeMediaProvider = await questionAPI.getFakeMedia()
+      this.fakeMediaProvider = fakeMediaProvider
     },
     nextStep() {
       this.step++
@@ -199,7 +215,8 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  /* overflow: hidden; */
+  overflow-y: auto;
 }
 </style>
 <style lang="scss">

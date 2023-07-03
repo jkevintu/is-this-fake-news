@@ -20,7 +20,27 @@ function objectToUrlParams(obj) {
 export default {
   getQuestions: () => {
     return new Promise((resolve, reject) => {
-      fetch(APIS.questionURL())
+      fetch(`${APIS.questionURL()}?sheet=0`)
+        .then((res) => res.json())
+        .then((data) => {
+          resolve(data)
+        })
+        .catch((err) => {})
+    })
+  },
+  getFakeMedia: () => {
+    return new Promise((resolve, reject) => {
+      fetch(`${APIS.questionURL()}?sheet=3`)
+        .then((res) => res.json())
+        .then((data) => {
+          resolve(data)
+        })
+        .catch((err) => {})
+    })
+  },
+  getComments: () => {
+    return new Promise((resolve, reject) => {
+      fetch(`${APIS.questionURL()}?sheet=2`)
         .then((res) => res.json())
         .then((data) => {
           resolve(data)
