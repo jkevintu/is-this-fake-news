@@ -147,6 +147,8 @@ export default {
   padding: 10px 0;
   align-items: center;
   .like-number {
+    font-size: 15px;
+    color: #65676b;
     padding-left: 4px;
   }
 }
