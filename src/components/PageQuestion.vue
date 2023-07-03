@@ -35,27 +35,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-.page-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px 0;
-}
-.p20 {
-  padding: 20px;
-}
-.m20 {
-  margin: 20px;
-}
-.mb10 {
-  margin-bottom: 10px;
-}
-.w100 {
-  width: 100%;
-}
 .answer-wrapper {
-  > div:not(:first-child) {
-    margin-top: 10px;
+  width: 100%;
+  > .button-wrapper {
+    margin: 10px 0;
   }
 }
 .max-image-wrapper {

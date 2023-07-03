@@ -1,11 +1,13 @@
 <template>
-  <div
-    class="button-wrapper"
-    :class="{ 'correct-type': correctType, 'incorrect-type': incorrectType, loading: loading }"
-    @click="emitClick"
-  >
-    <slot></slot>
-    <span v-if="text">{{ text }}</span>
+  <div class="button-wrapper">
+    <div
+      class="button"
+      :class="{ 'correct-type': correctType, 'incorrect-type': incorrectType, loading: loading }"
+      @click="emitClick"
+    >
+      <slot></slot>
+      <span v-if="text">{{ text }}</span>
+    </div>
   </div>
 </template>
 
@@ -41,13 +43,21 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .button-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+.button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 200px;
-  height: 50px;
+  width: 100%;
+  margin: 0 10px;
+  line-height: 4em;
+  font-size: 16px;
   border: 1px solid #42b983;
   border-radius: 5px;
   cursor: pointer;

@@ -161,3 +161,25 @@ export default {
   overflow: hidden;
 }
 </style>
+<style>
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.p20 {
+  padding: 20px;
+}
+.m20 {
+  margin: 20px;
+}
+.mb10 {
+  margin-bottom: 10px;
+}
+.w100 {
+  width: 100%;
+}
+</style>

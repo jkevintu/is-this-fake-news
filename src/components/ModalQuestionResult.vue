@@ -4,7 +4,7 @@
       <!-- {{ questionResult }} -->
       <h2>{{ getResult }}{{ getCorrectAnswer }}</h2>
       <p class="p10">{{ questionResult?.question?.fact }}</p>
-      <AButton @click="$emit('next')">下一題</AButton>
+      <AButton :correct-type="true" @click="$emit('next')">下一題</AButton>
     </div>
   </div>
 </template>
@@ -60,6 +60,7 @@ export default {
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   max-width: 800px;
+  margin: 0 20px;
 }
 .p10 {
   padding: 10px;

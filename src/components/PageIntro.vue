@@ -1,5 +1,5 @@
 <template>
-  <div class="page-container">
+  <div class="page-container page-intro">
     <h1>這是假消息嗎？</h1>
     <AButton :loading="loading" :correct-type="true" @buttonClick="$emit('next')">
       {{ loading ? 'Loading...' : '開始遊戲' }}
@@ -24,9 +24,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.page-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.page-container.page-intro {
+  justify-content: center;
 }
 </style>
