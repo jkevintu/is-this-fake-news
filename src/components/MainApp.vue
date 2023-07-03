@@ -1,7 +1,7 @@
 <template>
   <div class="game-wrapper">
     <div class="game-container">
-      <!-- <div>Loading: {{ loading }}</div> -->
+      <!-- <div>Loading: {{ scene }}</div> -->
       <div class="step-container">
         <PageIntro v-if="isStep(0)" :loading="loading" @next="nextStep" />
         <PageTutorial v-if="isStep(1)" @next="nextStep" />
@@ -17,7 +17,7 @@
           :question-result="questionResult"
           @next="closeQuestionModalAndNextStep"
         />
-        <PageResult v-if="isStep(3)" @restart="restartGame" />
+        <PageResult v-if="isStep(3)" :scene="scene" :questions="questions" @restart="restartGame" @share="share" />
       </div>
     </div>
   </div>
@@ -58,6 +58,10 @@ export default {
         response: null,
       },
       loading: false,
+      scene: {
+        milliseconds: 0,
+        interval: null,
+      },
     }
   },
   computed: {
@@ -69,6 +73,7 @@ export default {
     },
   },
   created() {
+    this.scene.interval = setInterval(this.startSceneInterval, 100)
     // Cookie
     if (Cookies.get('user_id') !== null) {
       this.userId = Cookies.get('user_id')
@@ -79,19 +84,33 @@ export default {
     this.loading = true
     this.loadQuestions()
   },
+  beforeDestroy() {
+    this.clearInterval()
+  },
   methods: {
     async loadQuestions() {
       console.log(questionAPI)
       const questions = await questionAPI.getQuestions()
       console.log('questions', questions)
+      // Filter empty question without id
       this.questions = questions.filter((q) => q.id)
       this.loading = false
     },
     nextStep() {
       this.step++
+      this.scene.milliseconds = 0
     },
     nextQuestion() {
       this.questionIndex++
+    },
+    startSceneInterval() {
+      this.scene.milliseconds = this.scene.milliseconds + 100
+    },
+    clearInterval() {
+      clearInterval(this.scene.interval)
+    },
+    showAfter(second) {
+      return second < this.scene.milliseconds / 1000
     },
     isStep(step) {
       return this.currentStep === step
@@ -109,14 +128,22 @@ export default {
       this.setShowQuestionResult(this.currentQuestion, response)
     },
     setShowQuestionResult(question, response) {
+      this.setUserResponse(question, response)
       this.questionResult = {
         question,
         response,
       }
       this.showQuestionResult = true
     },
+    setUserResponse(question, response) {
+      question.response = response
+    },
     closeQuestionModalAndNextStep() {
       this.showQuestionResult = false
+      // DEBUG
+      this.nextStep()
+      return
+      // DEBUG
       if (this.questionIndex === this.questions.length - 1) {
         this.nextStep()
         return
@@ -126,6 +153,10 @@ export default {
     restartGame() {
       this.step = 0
       this.questionIndex = 0
+    },
+    share(count) {
+      // Share to social media: Facebook
+      console.log('share', count)
     },
   },
 }
@@ -161,7 +192,7 @@ export default {
   overflow: hidden;
 }
 </style>
-<style>
+<style lang="scss">
 .page-container {
   display: flex;
   flex-direction: column;
@@ -181,5 +212,12 @@ export default {
 }
 .w100 {
   width: 100%;
+}
+.animation {
+  opacity: 0;
+  transition: all 0.7s ease-in;
+  &.show {
+    opacity: 1;
+  }
 }
 </style>
