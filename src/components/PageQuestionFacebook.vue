@@ -136,6 +136,7 @@ export default {
   width: 100%;
   margin-bottom: 20px;
   overflow-y: auto;
+  height: 100%;
 }
 .facebook-container {
   margin: 20px;

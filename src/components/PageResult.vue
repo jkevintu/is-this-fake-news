@@ -6,7 +6,7 @@
       </div>
       <div class="result-wrapper">
         <div class="animation result-text" :class="{ show: showAfter(1) }">
-          假消息防衛隊，你答對了 {{ correctCount }} 題
+          假消息偵查隊，你答對了 {{ correctCount }} 題
         </div>
         <div class="animation result-text" :class="{ show: showAfter(2.2) }">你的夥伴動物是 ...</div>
         <div class="result-reveal animation" :class="{ show: showAfter(4) }">
@@ -106,7 +106,7 @@ export default {
       return 'https://i.imgur.com/rVMVlIz.png'
     },
     getShareQuote() {
-      return `現今假消息泛濫，你看到的新聞到底是真的假的？一起來當假消息搜查隊，看看你的夥伴動物是誰吧！我的靈魂動物是${this.spiritAnimal}！`
+      return `現今假消息泛濫，你看到的新聞到底是真的假的？一起來當假消息偵查隊，看看你的夥伴動物是誰吧！我的靈魂動物是${this.spiritAnimal}！`
     },
     sharingWebsiteInfo() {
       return {
