@@ -6,6 +6,10 @@
         {{ getResult }}{{ getCorrectAnswer }}
       </div>
       <p class="p10">{{ questionResult?.question?.fact }}</p>
+      <p class="p10">
+        <span class="percentange">{{ percentageToText }}</span
+        >的人也跟你一樣{{ getResultText }}
+      </p>
       <AButton :correct-type="true" @click="$emit('next')">下一題</AButton>
     </div>
   </div>
@@ -23,8 +27,27 @@ export default {
     questionResult: Object,
   },
   computed: {
+    percentageToText() {
+      return `${this.samePercentage.toFixed(2) * 100}%`
+    },
+    samePercentage() {
+      if (this.isCorrect) {
+        return this.questionResult?.question?.answer_correct / this.questionResult?.question?.answer_total
+      } else {
+        return (
+          (this.questionResult?.question?.answer_total - this.questionResult?.question?.answer_correct) /
+          this.questionResult?.question?.answer_total
+        )
+      }
+    },
     isCorrect() {
       return this.questionResult?.question?.correct_answer === this.questionResult.response
+    },
+    getResultText() {
+      if (this.isCorrect) {
+        return '答對了'
+      }
+      return '答錯了'
     },
     getResult() {
       if (this.isCorrect) {
@@ -78,6 +101,11 @@ export default {
   &.incorrect {
     background: #dc3545;
   }
+}
+.percentange {
+  font-weight: 900;
+  font-size: 24px;
+  margin-right: 5px;
 }
 .p10 {
   padding: 10px;
