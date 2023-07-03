@@ -16,7 +16,7 @@
           </div>
           <div class="news-title">{{ currentQuestion?.news_title }}</div>
           <div class="mb10 max-image-wrapper">
-            <img :src="currentQuestion?.img_url" />
+            <img :src="currentQuestion?.img_url" @click="$emit('expandDetails')" />
           </div>
           <div class="news-response">
             <img
@@ -115,6 +115,7 @@ export default {
   max-height: 400px;
   overflow: hidden;
   img {
+    cursor: pointer;
     width: 100%;
     height: 100%;
     object-fit: cover;

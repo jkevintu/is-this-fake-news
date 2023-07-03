@@ -1,9 +1,8 @@
 <template>
-  <div class="modal-backdrop">
-    <div class="modal-wrapper">
-      <!-- {{ questionResult }} -->
-      <h2>{{ getResult }}{{ getCorrqectAnswer }}</h2>
-      <p class="p10">{{ questionResult?.question?.news_description }}</p>
+  <div class="modal-backdrop" @click="$emit('closeDetails')">
+    <div class="modal-wrapper" @click.prevent="modalClick">
+      <!-- {{ currentQuestion }} -->
+      <p class="p10">{{ currentQuestion?.news_description }}</p>
       <AButton @click="$emit('closeDetails')">關閉</AButton>
     </div>
   </div>
@@ -18,7 +17,12 @@ export default {
     AButton,
   },
   props: {
-    questionResult: Object,
+    currentQuestion: Object,
+  },
+  methods: {
+    modalClick(e) {
+      e.stopPropagation()
+    },
   },
 }
 </script>

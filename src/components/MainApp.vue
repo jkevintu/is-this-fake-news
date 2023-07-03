@@ -6,7 +6,7 @@
         <PageIntro v-if="isStep(0)" :loading="loading" @next="nextStep" />
         <PageTutorial v-if="isStep(1)" @next="nextStep" />
         <PageQuestion
-          v-if="isStep(2)"
+          v-if="false"
           :current-question="currentQuestion"
           :loading="loading"
           @expandDetails="expand"
@@ -14,16 +14,17 @@
           @chooseNewsFalse="answerNews(false)"
         />
         <PageQuestionFacebook
-          v-if="false"
+          v-if="isStep(2)"
           :fake-media-provider="fakeMediaProvider"
           :fake-response-provider="fakeResponse"
           :current-question="currentQuestion"
           :loading="loading"
           :scene="scene"
+          @expandDetails="expand"
           @chooseNewsTrue="answerNews(true)"
           @chooseNewsFalse="answerNews(false)"
         />
-        <ModalExpand v-if="showDetails" :question-result="questionResult" @closeDetails="close" />
+        <ModalExpand v-if="showDetails" :current-question="currentQuestion" @closeDetails="close" />
         <ModalQuestionResult
           v-if="showQuestionResult"
           :question-result="questionResult"
@@ -150,10 +151,10 @@ export default {
       return this.currentStep === step
     },
     expand() {
-      this.showDetail = true
+      this.showDetails = true
     },
     close() {
-      this.showDetail = false
+      this.showDetails = false
     },
     async answerNews(response) {
       console.log('response', response)
