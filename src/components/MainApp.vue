@@ -112,9 +112,7 @@ export default {
   },
   methods: {
     async loadQuestions() {
-      console.log(questionAPI)
       const questions = await questionAPI.getQuestions()
-      console.log('questions', questions)
       // Filter empty question without id
       this.questions = questions.filter((q) => q.id)
       this.loading = false
@@ -125,7 +123,6 @@ export default {
     },
     async loadFakeResponse() {
       const fakeResponse = await questionAPI.getFakeResponse()
-      console.log(fakeResponse)
       this.fakeResponse = fakeResponse
     },
     nextStep() {
