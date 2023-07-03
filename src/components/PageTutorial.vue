@@ -1,6 +1,6 @@
 <template>
   <div class="page-container">
-    <h1>假消息教學</h1>
+    <h1>遊戲教學</h1>
     <p class="p20">
       教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學教學
     </p>
@@ -24,11 +24,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.page-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .p20 {
   padding: 20px;
 }
