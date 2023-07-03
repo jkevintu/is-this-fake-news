@@ -198,7 +198,7 @@ export default {
 }
 .response {
   display: flex;
-  margin: 4px 0 0 16px;
+  margin: 4px 10px 0 16px;
   .response-profile {
     padding-right: 6px;
     img {
