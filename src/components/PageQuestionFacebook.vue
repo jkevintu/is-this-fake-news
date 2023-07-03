@@ -87,7 +87,6 @@ export default {
   justify-content: center;
   height: 100%;
   background: #f0f2f5;
-  flex: 0;
 }
 .facebook-wrapper {
   height: 100%;
