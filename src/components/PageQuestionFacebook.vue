@@ -81,7 +81,7 @@ export default {
 }
 .max-image-wrapper {
   max-width: 100%;
-  max-height: 300px;
+  max-height: 400px;
   overflow: hidden;
   img {
     width: 100%;
