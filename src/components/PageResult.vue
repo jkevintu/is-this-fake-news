@@ -10,16 +10,27 @@
         <div class="result-reveal animation" :class="{ show: showAfter(4) }">
           <div class="result-text big">{{ spiritAnimal }}</div>
           <div class="result-image">
-            <img :src="spiritAnimalImg" />
+            <img :src="spiritAnimalImgUrl" />
           </div>
         </div>
       </div>
       <!-- <div class="debug">{{ questions }}</div> -->
-      <div class="actions-wrapper">
-        <!-- <AButton class="animation" :class="{ show: showAfter(5) }" @click="$emit('reset')">[DEBUG] reset</AButton> -->
-        <AButton class="animation" :class="{ show: showAfter(5) }" @click="$emit('share', correctCount)"
-          >分享結果</AButton
+      <div class="actions-wrapper animation" :class="{ show: showAfter(5) }">
+        <div>分享結果</div>
+        <ShareNetwork
+          v-for="network in shareNetwork"
+          :key="network.network"
+          :network="network.network"
+          :style="{ backgroundColor: network.color }"
+          :url="sharingWebsiteInfo.url"
+          :title="sharingWebsiteInfo.title"
+          :description="sharingWebsiteInfo.description"
+          :quote="sharingWebsiteInfo.quote"
+          :hashtags="sharingWebsiteInfo.hashtags"
         >
+          <i :class="network.icon"></i>
+          <span>{{ network.name }}</span>
+        </ShareNetwork>
       </div>
     </div>
   </div>
@@ -31,7 +42,7 @@ import AButton from './AButton.vue'
 export default {
   name: 'PageResult',
   components: {
-    AButton,
+    // AButton,
   },
   props: {
     scene: {
@@ -45,6 +56,30 @@ export default {
       type: Array,
       default: () => [],
     },
+  },
+  data() {
+    return {
+      shareNetwork: [
+        {
+          network: 'facebook',
+          name: 'Facebook',
+          icon: 'fab fah fa-lg fa-facebook-f',
+          color: '#1877f2',
+        },
+        {
+          network: 'line',
+          name: 'Line',
+          icon: 'fab fah fa-lg fa-line',
+          color: '#00c300',
+        },
+        {
+          network: 'twitter',
+          name: 'Twitter',
+          icon: 'fab fah fa-lg fa-twitter',
+          color: '#1da1f2',
+        },
+      ],
+    }
   },
   computed: {
     correctCount() {
@@ -60,7 +95,7 @@ export default {
       }
       return '櫻花鉤吻鮭'
     },
-    spiritAnimalImg() {
+    spiritAnimalImgUrl() {
       const correctCount = this.correctCount
       if (correctCount >= 8) {
         return 'https://i.imgur.com/pwNShrA.jpg'
@@ -68,6 +103,18 @@ export default {
         return 'https://i.imgur.com/AYImZx9.png'
       }
       return 'https://i.imgur.com/rVMVlIz.png'
+    },
+    getShareQuote() {
+      return `我的靈魂動物是${this.spiritAnimal}！你也來測測看吧！`
+    },
+    sharingWebsiteInfo() {
+      return {
+        url: this.spiritAnimalImgUrl,
+        title: this.getShareQuote,
+        quote: this.getShareQuote,
+        hashtags: '#這是假消息嗎？ #靈魂動物測驗 #2023',
+        twitterUser: 'ustaiwanwatch',
+      }
     },
   },
   methods: {
@@ -110,14 +157,32 @@ export default {
     height: auto;
     max-width: 100%;
     max-height: 400px;
+    border-radius: 15px;
   }
 }
 .result-wrapper {
   display: flex;
   flex-direction: column;
   flex: 1;
+  overflow-y: auto;
   .result-reveal {
-    margin-top: 4em;
+    margin-top: 2em;
+  }
+}
+.actions-wrapper {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  > a {
+    margin: 3px;
+    height: 2.6em;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    font-size: 16px;
   }
 }
 </style>

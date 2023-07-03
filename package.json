@@ -12,7 +12,8 @@
     "axios": "^1.4.0",
     "core-js": "^3.30.2",
     "sass": "^1.63.6",
-    "vue": "^3.3.4"
+    "vue": "^3.3.4",
+    "vue-social-sharing": "^4.0.0-alpha4"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.5",
