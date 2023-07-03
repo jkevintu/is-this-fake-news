@@ -9,7 +9,7 @@
           v-if="false"
           :current-question="currentQuestion"
           :loading="loading"
-          @expandDetails="expand"
+          @expandDetails="expandDetails"
           @chooseNewsTrue="answerNews(true)"
           @chooseNewsFalse="answerNews(false)"
         />
@@ -21,7 +21,7 @@
           :loading="loading"
           :scene="scene"
           :current-question-progress="currentQuestionProgress"
-          @expandDetails="expand"
+          @expandDetails="expandDetails"
           @chooseNewsTrue="answerNews(true)"
           @chooseNewsFalse="answerNews(false)"
         />
@@ -154,12 +154,13 @@ export default {
     isStep(step) {
       return this.currentStep === step
     },
-    expand() {
+    expandDetails() {
       questionAPI.postEvent({
         user_id: this.userId,
         question_id: this.currentQuestion?.id,
         event: 'expand_detail',
       })
+      this.currentQuestion.is_expand = true
       this.showDetails = true
     },
     close() {
@@ -173,6 +174,7 @@ export default {
         question_id: this.currentQuestion?.id,
         event: 'response',
         response: response,
+        is_expand: !!this.currentQuestion?.is_expand,
       })
       this.loading = false
       this.setShowQuestionResult(this.currentQuestion, response)

@@ -16,7 +16,7 @@
           </div>
           <div class="news-title">{{ currentQuestion?.news_title }}</div>
           <div class="mb10 max-image-wrapper">
-            <img :src="currentQuestion?.img_url" @click="$emit('expandDetails')" />
+            <img :src="currentQuestion?.img_url" @click="expandDetails" />
           </div>
           <div class="news-response">
             <img
@@ -93,11 +93,14 @@ export default {
       return this.fakeMediaProvider[randomIndex]
     },
     addFakeResponse() {
-      console.log(this.fakeResponseProvider[Math.floor(Math.random() * this.fakeResponseProvider.length)])
+      // console.log(this.fakeResponseProvider[Math.floor(Math.random() * this.fakeResponseProvider.length)])
       this.fakeResponse = [
         ...this.fakeResponse,
         this.fakeResponseProvider[Math.floor(Math.random() * this.fakeResponseProvider.length)],
       ]
+    },
+    expandDetails() {
+      this.$emit('expandDetails', this.currentQuestion)
     },
   },
 }
